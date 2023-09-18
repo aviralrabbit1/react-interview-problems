@@ -1,10 +1,16 @@
 // Render a Tree structure of folder/file
 
+import { useState } from 'react';
+
 const files = {
   children: [
     {
       name: 'public',
-      children: ['index.html'],
+      children: [
+        {
+          name: 'index.html',
+        },
+      ],
     },
     {
       name: 'src',
@@ -39,15 +45,23 @@ type TNode = {
   children?: TNode[]; // '?' denotes optional
 };
 
-function Node({ entry, depth }:{ entry: TNode; depth: number}){
+function Node({ entry, depth }: { entry: TNode; depth: number }) {
+  const [expanded, setExpanded] = useState(false);
+
   return (
     <div>
+      {entry.children && (
+        <button onClick={() => setExpanded(!expanded)}>+</button>
+      )}
       {entry.name}
-      <div style={{paddingLeft: `${depth*20}px`}} >
-      {entry.children?.map((entry) => (
-        <Node entry={entry} depth={depth+1} />
-        ))}
-      </div>
+
+      {expanded && (
+        <div style={{ paddingLeft: `${depth * 20}px` }}>
+          {entry.children?.map((entry) => (
+            <Node entry={entry} depth={depth + 1} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
