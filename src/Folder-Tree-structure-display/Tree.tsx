@@ -39,13 +39,15 @@ type TNode = {
   children?: TNode[]; // '?' denotes optional
 };
 
-function Node({ name, children }: TNode) {
+function Node({ entry, depth }:{ entry: TNode; depth: number}){
   return (
     <div>
-      {name}
-      {children?.map((entry) => (
-        <Node {...entry} />
-      ))}
+      {entry.name}
+      <div style={{paddingLeft: `${depth*20}px`}} >
+      {entry.children?.map((entry) => (
+        <Node entry={entry} depth={depth+1} />
+        ))}
+      </div>
     </div>
   );
 }
@@ -54,7 +56,7 @@ export default function Tree() {
   return (
     <div>
       {files.children.map((entry) => (
-        <Node {...entry} />
+        <Node entry={entry} depth={1} />
       ))}
     </div>
   );
