@@ -40,18 +40,22 @@ type TNode = {
 };
 
 function Node({ name, children }: TNode) {
-  return <div>{name}</div>;
+  return (
+    <div>
+      {name}
+      {children?.map((entry) => (
+        <Node {...entry} />
+      ))}
+    </div>
+  );
 }
 
 export default function Tree() {
   return (
     <div>
-      Files:
-      <div>
-        {files.children.map((entry) => (
-          <Node {...entry} />
-        ))}
-      </div>
+      {files.children.map((entry) => (
+        <Node {...entry} />
+      ))}
     </div>
   );
 }
