@@ -7,6 +7,7 @@ type TCoordinates = {
 
 export function CircleUncircle() {
   const [points, setPoints] = useState<TCoordinates[]>([]);
+  const [undone, setUndone] = useState<TCoordinates[]>([]);
   function placeCircle(e: React.MouseEvent<HTMLDivElement>) {
     console.log(e);
     // SyntheticBaseEvent : can be - ClientX,Y, pageX,Y , screenX,Y
@@ -22,12 +23,24 @@ export function CircleUncircle() {
 
   function undo(){
     const newPoints = [...points];
-    newPoints.pop();
+    const undonePoint = newPoints.pop();
+    if(!undonePoint) return;
+    setUndone([...undone, undonePoint]);
     setPoints(newPoints);
+  }
+  function redo(){
+    const newUndone = [...undone];
+    const newPoints = [...points];
+    const undonePoint = newUndone.pop(); // Pop the latest
+    if(!undonePoint) return;
+    newPoints.push(undonePoint);
+    setPoints(newPoints);
+    setUndone(newUndone);
   }
   return (
     <>
       <button className='undo' onClick={undo} >Undo</button>
+      <button className='undo' onClick={redo} >Redo</button>
       <div
         className="dashboard"
         style={{ height: '100vh', background: 'black', color: 'red' }}
