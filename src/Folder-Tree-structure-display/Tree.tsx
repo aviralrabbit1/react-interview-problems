@@ -51,7 +51,9 @@ function Node({ entry, depth }: { entry: TNode; depth: number }) {
   return (
     <div>
       {entry.children && (
-        <button onClick={() => setExpanded(!expanded)}>+</button>
+        <button onClick={() => setExpanded(!expanded)}>
+          {expanded ? '-': '+'}
+        </button>
       )}
       {entry.name}
 
