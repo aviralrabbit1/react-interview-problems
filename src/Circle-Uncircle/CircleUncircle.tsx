@@ -10,12 +10,12 @@ export function CircleUncircle() {
   function placeCircle(e: React.MouseEvent<HTMLDivElement>) {
     console.log(e);
     // SyntheticBaseEvent : can be - ClientX,Y, pageX,Y , screenX,Y
-    const { clientX, clientY } = e;
+    const { screenX, screenY } = e;
     setPoints([
       ...points,
       {
-        x: clientX,
-        y: clientY,
+        x: screenX,
+        y: screenY,
       },
     ]);
   }
@@ -25,8 +25,11 @@ export function CircleUncircle() {
         <div
           className="point"
           style={{
-            left: point.x + 'px',
-            right: point.y + 'px',
+            left: point.x-13 + 'px',
+            top: point.y-13 + 'px',
+            // circles are viewed as stacked in left side, because of display: block
+            display: 'inline-block', // Now stacks linearly
+            position: 'absolute', // now following x,y coordinate
           }}
         >
           O
