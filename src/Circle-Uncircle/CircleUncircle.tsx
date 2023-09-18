@@ -19,5 +19,19 @@ export function CircleUncircle() {
       },
     ]);
   }
-  return <div className="App" onClick={placeCircle}></div>;
+  return (
+    <div className="App" onClick={placeCircle}>
+      {points.map((point) => (
+        <div
+          className="point"
+          style={{
+            left: point.x + 'px',
+            right: point.y + 'px',
+          }}
+        >
+          O
+        </div>
+      ))}
+    </div>
+  );
 }
