@@ -22,20 +22,20 @@ export function CircleUncircle() {
   }
 
   function undo(){
-    const newPoints = [...points];
-    const undonePoint = newPoints.pop();
+    const newPoints = [...points]; // copying the original array with spread operator
+    const undonePoint = newPoints.pop(); // removing the last point from array
     if(!undonePoint) return;
-    setUndone([...undone, undonePoint]);
+    setUndone([...undone, undonePoint]); // pushing the undo point in 'undone' array
     setPoints(newPoints);
   }
   function redo(){
-    const newUndone = [...undone];
-    const newPoints = [...points];
-    const undonePoint = newUndone.pop(); // Pop the latest
+    const newUndone = [...undone]; // set of undo points
+    const newPoints = [...points]; // set of remaining array points
+    const undonePoint = newUndone.pop(); // Pop the latest 'undo' point
     if(!undonePoint) return;
-    newPoints.push(undonePoint);
-    setPoints(newPoints);
-    setUndone(newUndone);
+    newPoints.push(undonePoint); // push the latest undo point into copy of original remaining array
+    setPoints(newPoints); // new set of points
+    setUndone(newUndone); // new set of undo points
   }
   return (
     <>
