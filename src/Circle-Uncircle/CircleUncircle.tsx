@@ -25,7 +25,7 @@ export function CircleUncircle() {
         <div
           className="point"
           style={{
-            left: point.x-13 + 'px',
+            left: point.x-13 + 'px', // offset = 13px
             top: point.y-13 + 'px',
             // circles are viewed as stacked in left side, because of display: block
             display: 'inline-block', // Now stacks linearly
