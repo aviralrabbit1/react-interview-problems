@@ -20,23 +20,26 @@ export function CircleUncircle() {
     ]);
   }
   return (
-    <div className="App" onClick={placeCircle}>
+    <div
+      className="dashboard"
+      style={{ height: '100vh', background: 'black', color: 'red' }}
+      onClick={placeCircle}
+    >
       {points.map((point) => (
         <div
           className="point"
           style={{
-            left: point.x-6 + 'px', // offset = 13px
-            top: point.y-13 + 'px',
+            left: point.x - 6 + 'px', // offset = 13px
+            top: point.y - 13 + 'px',
             // circles are viewed as stacked in left side, because of display: block
             display: 'inline-block', // Now stacks linearly
             position: 'absolute', // now following x,y coordinate
             borderRadius: '50%',
             width: '10px',
             height: '10px',
-            background: 'red'
+            background: 'red',
           }}
-        >
-        </div>
+        ></div>
       ))}
     </div>
   );
