@@ -50,8 +50,9 @@ export function CircleUncircle() {
         style={{ height: '100vh', background: 'black', color: 'red' }}
         onClick={placeCircle}
       >
-        {points.map((point) => (
+        {points.map((point, index) => (
           <div
+            key={index}
             className="point"
             style={{
               left: point.x - 6 + 'px', // offset = 13px
