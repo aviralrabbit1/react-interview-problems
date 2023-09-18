@@ -4,9 +4,7 @@ const files = {
   children: [
     {
       name: 'public',
-      children: [
-        'index.html',
-      ]
+      children: ['index.html'],
     },
     {
       name: 'src',
@@ -16,46 +14,44 @@ const files = {
           children: [
             {
               name: 'Tree.tsx',
-            }
-          ]
+            },
+          ],
         },
         {
           name: 'App.tsx',
         },
         {
           name: 'index.tsx',
-        }
-      ]
+        },
+      ],
     },
     {
       name: 'package.json',
     },
     {
       name: 'Readme.md',
-    }
-  ]
+    },
+  ],
 };
 
-type TEntry = {
-  name: string,
-  children?: TEntry[]
-}
+type TNode = {
+  name: string;
+  children?: TNode[]; // '?' denotes optional
+};
 
-function Node({ name, children}: TEntry){
-  return (
-    <div>
-      Individual items
-    </div>
-  )
+function Node({ name, children }: TNode) {
+  return <div>{name}</div>;
 }
 
 export default function Tree() {
   return (
     <div>
-      Tree:
+      Files:
       <div>
-        Tree rendering
+        {files.children.map((entry) => (
+          <Node {...entry} />
+        ))}
       </div>
     </div>
-  )
+  );
 }
