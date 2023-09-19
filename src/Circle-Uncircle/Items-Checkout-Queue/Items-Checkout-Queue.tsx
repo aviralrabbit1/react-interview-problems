@@ -5,16 +5,21 @@ import { useState } from "react";
 
 export default function ItemsCheckoutQueue() {
     const [items, setItems] = useState(0);
-    const [lines, setLines] = useState([[10,6,8],[],[],[],[]]);
+    const [lines, setLines] = useState([[10,6,8],[12],[2, 0, 3],[4],[9]]);
     function addItemsToQueue(e: React.FormEvent<HTMLFormElement>) {
       e.preventDefault();      
       // Loop through the queue, find one with the list items, push into it
 
-      let lineWithLeast;
+      let lineWithLeast, leastItemAmount = 1e9;
+
       for(let line of lines){
         const totalInLine = line.reduce((sum, value) => sum+value, 0);
-        console.log(totalInLine);
+        if(totalInLine < leastItemAmount) {
+          lineWithLeast = line;
+          leastItemAmount = totalInLine;
+        }
       }
+      console.log(`lineWithLeast is ${lines[lineWithLeast]} array containing ${lineWithLeast}`);
     }
   return (
     <div className="queue" 
