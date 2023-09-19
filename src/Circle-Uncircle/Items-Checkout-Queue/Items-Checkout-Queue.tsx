@@ -6,11 +6,13 @@ import { useState } from "react";
 export default function ItemsCheckoutQueue() {
     const [items, setItems] = useState(0);
     const [lines, setLines] = useState([[10,6,8],[12],[2, 0, 3],[4],[9]]);
+
     function addItemsToQueue(e: React.FormEvent<HTMLFormElement>) {
       e.preventDefault();      
       // Loop through the queue, find one with the list items, push into it
 
-      let lineWithLeast, leastItemAmount = 1e9;
+      let lineWithLeast: number[] | undefined ;
+      let leastItemAmount = 1e9;
 
       for(let line of lines){
         const totalInLine = line.reduce((sum, value) => sum+value, 0);
@@ -19,20 +21,31 @@ export default function ItemsCheckoutQueue() {
           leastItemAmount = totalInLine;
         }
       }
-      console.log(`lineWithLeast is ${lines[lineWithLeast]} array containing ${lineWithLeast}`);
+      // console.log(`lineWithLeast is ${lines[lineWithLeast]} array containing ${lineWithLeast}`);
+
+      if(!lineWithLeast) return; // for undefined value
+      console.log(`before ${lineWithLeast}`);
+
+      // lineWithLeast.push(items); // pushing current items into the array with least items
+
+      setLines((prevLines) => prevLines.map((line) => 
+        line === lineWithLeast ? [...line, items]: line
+      ));
+      console.log(`after ${lineWithLeast}`);
     }
+
   return (
     <div className="queue" 
-    style={{
-      height: "100vh",
-      background: "black",
-      color: "red",
-      alignItems: "center",
-      justifyContent: "center",
-      display: "flex", // Center horizontally
-      flexDirection: "column", // Center vertically
-      gap: "20px"
-  }}>
+      style={{
+        height: "100vh",
+        background: "black",
+        color: "red",
+        alignItems: "center",
+        justifyContent: "center",
+        display: "flex", // Center horizontally
+        flexDirection: "column", // Center vertically
+        gap: "20px"
+    }}>
         Items-Checkout-Queue
         <form onSubmit={addItemsToQueue}>
             <input required type="number" value={items} 
