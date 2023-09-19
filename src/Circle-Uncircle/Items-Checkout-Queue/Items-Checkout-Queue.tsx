@@ -5,7 +5,17 @@ import { useState } from "react";
 
 export default function ItemsCheckoutQueue() {
     const [items, setItems] = useState(0);
-    const [lines, setLines] = useState([[],[],[],[],[]]);
+    const [lines, setLines] = useState([[10,6,8],[],[],[],[]]);
+    function addItemsToQueue(e: React.FormEvent<HTMLFormElement>) {
+      e.preventDefault();      
+      // Loop through the queue, find one with the list items, push into it
+
+      let lineWithLeast;
+      for(let line of lines){
+        const totalInLine = line.reduce((sum, value) => sum+value, 0);
+        console.log(totalInLine);
+      }
+    }
   return (
     <div className="queue" 
     style={{
@@ -19,7 +29,7 @@ export default function ItemsCheckoutQueue() {
       gap: "20px"
   }}>
         Items-Checkout-Queue
-        <form>
+        <form onSubmit={addItemsToQueue}>
             <input required type="number" value={items} 
             onChange={(e) => setItems(e.currentTarget.valueAsNumber)} />
             <button>Checkout</button>
