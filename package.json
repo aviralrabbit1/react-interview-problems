@@ -1,6 +1,6 @@
 {
-  "name": "stackblitz-starters-26ncwe",
-  "version": "0.0.0",
+  "name": "react_interview_problems",
+  "version": "0.0.2",
   "private": true,
   "dependencies": {
     "react": "18.2.0",
@@ -16,5 +16,17 @@
   },
   "devDependencies": {
     "react-scripts": "latest"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
